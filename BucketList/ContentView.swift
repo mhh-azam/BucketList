@@ -5,12 +5,62 @@
 //  Created by QBUser on 09/07/22.
 //
 
+import MapKit
 import SwiftUI
 
 struct ContentView: View {
+
+    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50))
+
+    @State private var locations = [Location]()
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+                MapAnnotation(coordinate: location.coordinate) {
+                    VStack {
+                        Image(systemName: "star.circle")
+                            .resizable()
+                            .foregroundColor(.red)
+                            .frame(width: 44, height: 44)
+                            .background(.white)
+                            .clipShape(Circle())
+
+                        Text(location.name)
+                    }
+                }
+            }
+                .ignoresSafeArea()
+
+            Circle()
+                .fill(.blue.opacity(0.3))
+                .frame(width: 32, height: 32)
+
+            VStack {
+
+                Spacer()
+
+                HStack {
+
+                    Spacer()
+
+                    Button {
+                        let newLocation = Location(name: "New Location", description: "desc", longitude: mapRegion.center.longitude, latitude: mapRegion.center.latitude)
+                        locations.append(newLocation)
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .padding()
+                    .background(.black.opacity(0.75))
+                    .foregroundColor(.white)
+                    .font(.title)
+                    .clipShape(Circle())
+                    .padding([.horizontal, .bottom])
+                }
+
+            }
+
+        }
     }
 }
 
