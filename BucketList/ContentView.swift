@@ -12,14 +12,18 @@ struct ContentView: View {
 
     @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50))
 
+    @State private var locations = [Location]()
+
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $mapRegion)
+            Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+                MapMarker(coordinate: location.coordinate)
+            }
                 .ignoresSafeArea()
 
             Circle()
-                .foregroundColor(.blue.opacity(0.3))
-                .frame(width: 44, height: 44)
+                .fill(.blue.opacity(0.3))
+                .frame(width: 32, height: 32)
 
             VStack {
 
@@ -30,13 +34,15 @@ struct ContentView: View {
                     Spacer()
 
                     Button {
-                        //TODO: Add Location
-                    } label: {
+                        let newLocation = Location(name: "New Location", description: "desc", longitude: mapRegion.center.longitude, latitude: mapRegion.center.latitude)
+                        locations.append(newLocation)
+                    } label: {	
                         Image(systemName: "plus")
                     }
                     .padding()
-                    .background(.black.opacity(0.3))
+                    .background(.black.opacity(0.75))
                     .foregroundColor(.white)
+                    .font(.title)
                     .clipShape(Circle())
                     .padding([.horizontal, .bottom])
                 }
