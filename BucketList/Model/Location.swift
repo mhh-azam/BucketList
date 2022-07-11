@@ -22,4 +22,6 @@ struct Location: Identifiable, Codable, Equatable  {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
+
+    static let example = Location(name: "Buckingham Palace", description: "Where Queen Elizabeth lives with her dorgis.", longitude: 51.501, latitude: -0.141)
 }

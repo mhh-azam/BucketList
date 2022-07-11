@@ -17,7 +17,18 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-                MapMarker(coordinate: location.coordinate)
+                MapAnnotation(coordinate: location.coordinate) {
+                    VStack {
+                        Image(systemName: "star.circle")
+                            .resizable()
+                            .foregroundColor(.red)
+                            .frame(width: 44, height: 44)
+                            .background(.white)
+                            .clipShape(Circle())
+
+                        Text(location.name)
+                    }
+                }
             }
                 .ignoresSafeArea()
 
@@ -36,7 +47,7 @@ struct ContentView: View {
                     Button {
                         let newLocation = Location(name: "New Location", description: "desc", longitude: mapRegion.center.longitude, latitude: mapRegion.center.latitude)
                         locations.append(newLocation)
-                    } label: {	
+                    } label: {
                         Image(systemName: "plus")
                     }
                     .padding()
