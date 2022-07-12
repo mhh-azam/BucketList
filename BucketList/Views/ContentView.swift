@@ -10,14 +10,11 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50))
-
-    @State private var locations = [Location]()
-    @State private var selectedLocation: Location?
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+            Map(coordinateRegion: $viewModel.mapRegion, annotationItems: viewModel.locations) { location in
                 MapAnnotation(coordinate: location.coordinate) {
                     VStack {
                         Image(systemName: "star.circle")
@@ -30,7 +27,7 @@ struct ContentView: View {
                         Text(location.name)
                     }
                     .onTapGesture {
-                        selectedLocation = location
+                        viewModel.selectedLocation = location
                     }
                 }
             }
@@ -49,8 +46,7 @@ struct ContentView: View {
                     Spacer()
 
                     Button {
-                        let newLocation = Location(name: "New Location", description: "desc", longitude: mapRegion.center.longitude, latitude: mapRegion.center.latitude)
-                        locations.append(newLocation)
+                        viewModel.addLocation()
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -63,11 +59,9 @@ struct ContentView: View {
                 }
             }
         }
-        .sheet(item: $selectedLocation) { location in
+        .sheet(item: $viewModel.selectedLocation) { location in
             EditView(location: location) { newLocation in
-                if let index = locations.firstIndex(of: location) {
-                    locations[index] = newLocation
-                }
+                viewModel.updateLocation(newLocation)
             }
         }
     }
