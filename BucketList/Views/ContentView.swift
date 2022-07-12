@@ -13,6 +13,7 @@ struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
+        if viewModel.isUnlocked {
         ZStack {
             Map(coordinateRegion: $viewModel.mapRegion, annotationItems: viewModel.locations) { location in
                 MapAnnotation(coordinate: location.coordinate) {
@@ -63,6 +64,18 @@ struct ContentView: View {
             EditView(location: location) { newLocation in
                 viewModel.updateLocation(newLocation)
             }
+        }
+        } else {
+            Button {
+                viewModel.authenticate()
+            } label: {
+                Text("Unlock Places")
+                    .padding()
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+            }
+
         }
     }
 }
