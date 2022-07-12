@@ -12,6 +12,7 @@
 		B5AE8D962879B853001175CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AE8D952879B853001175CF /* Assets.xcassets */; };
 		B5AE8D992879B853001175CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AE8D982879B853001175CF /* Preview Assets.xcassets */; };
 		B5B1C084287D70B60031F34F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1C083287D70B60031F34F /* Result.swift */; };
+		B5CD2B7C287D8A2B009408E9 /* ConetntView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD2B7B287D8A2B009408E9 /* ConetntView+ViewModel.swift */; };
 		B5D9FF95287C6A3A00A3537C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9FF94287C6A3A00A3537C /* Location.swift */; };
 		B5D9FF98287C716800A3537C /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9FF97287C716800A3537C /* EditView.swift */; };
 /* End PBXBuildFile section */
@@ -23,6 +24,7 @@
 		B5AE8D952879B853001175CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5AE8D982879B853001175CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B5B1C083287D70B60031F34F /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B5CD2B7B287D8A2B009408E9 /* ConetntView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConetntView+ViewModel.swift"; sourceTree = "<group>"; };
 		B5D9FF94287C6A3A00A3537C /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		B5D9FF97287C716800A3537C /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				B5D9FF94287C6A3A00A3537C /* Location.swift */,
+				B5CD2B7B287D8A2B009408E9 /* ConetntView+ViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 				B5D9FF95287C6A3A00A3537C /* Location.swift in Sources */,
 				B5D9FF98287C716800A3537C /* EditView.swift in Sources */,
 				B5AE8D922879B852001175CF /* BucketListApp.swift in Sources */,
+				B5CD2B7C287D8A2B009408E9 /* ConetntView+ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
