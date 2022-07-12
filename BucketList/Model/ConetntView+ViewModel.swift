@@ -15,9 +15,21 @@ extension ContentView {
         @Published private(set) var locations = [Location]()
         @Published var selectedLocation: Location?
 
+        let savePath = FileManager.default.documentsDirectory.appendingPathComponent("SavedPlaces")
+
+        init() {
+            do {
+                let data = try Data(contentsOf: savePath)
+                locations = try JSONDecoder().decode([Location].self, from: data)
+            } catch  {
+                locations = []
+            }
+        }
+
         func addLocation() {
             let newLocation = Location(name: "New Location", description: "", longitude: mapRegion.center.longitude, latitude: mapRegion.center.latitude)
             locations.append(newLocation)
+            save()
         }
 
         func updateLocation(_ location: Location) {
@@ -25,6 +37,16 @@ extension ContentView {
 
             if let index = locations.firstIndex(of: selectedLocation) {
                 locations[index] = location
+                save()
+            }
+        }
+
+        func save() {
+            do {
+                let data = try JSONEncoder().encode(locations)
+                try data.write(to: savePath, options: [.atomic,.completeFileProtection])
+            } catch {
+                print("Unable to save data")
             }
         }
     }
