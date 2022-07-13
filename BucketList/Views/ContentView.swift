@@ -75,6 +75,11 @@ struct ContentView: View {
                     .foregroundColor(.white)
                     .clipShape(Capsule())
             }
+            .alert(viewModel.alertTitle, isPresented: $viewModel.showAlert) {
+                Button("Ok") { }
+            } message: {
+                Text(viewModel.alertMessage)
+            }
 
         }
     }

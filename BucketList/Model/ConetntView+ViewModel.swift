@@ -17,6 +17,10 @@ extension ContentView {
         @Published var selectedLocation: Location?
         @Published var isUnlocked = false
 
+        @Published private(set) var alertTitle = ""
+        @Published private(set) var alertMessage = ""
+        @Published var showAlert = false
+
         let savePath = FileManager.default.documentsDirectory.appendingPathComponent("SavedPlaces")
 
         init() {
@@ -65,11 +69,15 @@ extension ContentView {
                         }
                     }
                     else {
-                        //Error
+                        Task { @MainActor in
+                            self.alertTitle = "Authentication Failed!"
+                            self.alertMessage = "Biometric authentication failed."
+                            self.showAlert = true
+                        }
                     }
                 }
             } else {
-                //No biometrics
+                print("No biometrics")
             }
         }
     }
