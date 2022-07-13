@@ -27,6 +27,10 @@ extension ContentView {
             do {
                 let data = try Data(contentsOf: savePath)
                 locations = try JSONDecoder().decode([Location].self, from: data)
+
+                if let lastLocation = locations.last {
+                    mapRegion = MKCoordinateRegion(center: lastLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50))
+                }
             } catch  {
                 locations = []
             }
